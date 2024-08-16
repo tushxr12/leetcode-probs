@@ -1,0 +1,16 @@
+class Solution {
+public:
+    int maxDistance(vector<vector<int>>& arr) {
+        int smallest = arr[0][0], biggest = arr[0].back();
+        int maxi = INT_MIN;
+
+        for(int i = 1;i < arr.size();i++)
+        {
+            maxi = max(maxi, biggest - arr[i][0]);
+            maxi = max(maxi, arr[i].back() - smallest);
+            smallest = min(smallest, arr[i][0]);
+            biggest = max(biggest, arr[i].back());
+        }
+        return maxi;
+    }
+};
