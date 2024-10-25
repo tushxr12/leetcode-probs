@@ -1,4 +1,3 @@
-# Write your MySQL query statement below
 SELECT MAX(num) as num
 FROM MyNumbers
 WHERE num IN
