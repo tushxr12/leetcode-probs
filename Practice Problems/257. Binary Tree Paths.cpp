@@ -40,10 +40,6 @@ public:
                     curr += (to_string(i[j]) + "->");
                 }
             }
-            // for(auto j : i)
-            // {
-            //     curr += (to_string(j) + "->");
-            // }
             ans.push_back(curr);
         }
         return ans;
