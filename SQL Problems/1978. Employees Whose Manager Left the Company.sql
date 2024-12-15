@@ -1,4 +1,3 @@
-# Write your MySQL query statement below
 SELECT employee_id
 FROM Employees
 WHERE Salary < 30000 AND
