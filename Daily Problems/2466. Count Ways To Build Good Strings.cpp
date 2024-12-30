@@ -45,3 +45,24 @@ public:
         return f(low, high, zero,one ,0,dp);
     }
 };
+
+//Tabulation
+class Solution {
+private:
+    int mod = 1e9 + 7;
+public:
+    int countGoodStrings(int low, int high, int zero, int one) {
+        int maxLen = high + max(zero , one);
+        vector<int> dp(maxLen + 1,-0);
+        for(int len = high ; len >= 0;len--)
+        {
+            int zeroLen = len + zero;
+            int oneLen = len + one;
+            int zeroCount = (zeroLen >= low && zeroLen <= high) ? 1 : 0;
+            int oneCount = (oneLen >= low && oneLen <= high) ? 1 : 0;
+            int res = (zeroCount + dp[zeroLen] + oneCount + dp[oneLen])%mod;
+            dp[len] = res % mod;
+        }
+        return dp[0];
+    }
+};
