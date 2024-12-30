@@ -18,3 +18,30 @@ public:
         return f(low, high, zero, one, 0);
     }
 };
+
+//Memoization
+class Solution {
+private:
+    int mod = 1e9 + 7;
+    int f(int low,int high, int zero,int one,int len, vector<int> &dp)
+    {
+        if(len > high)
+            return 0;
+        
+        if(dp[len] != -1)
+            return dp[len];
+        
+        int zeroLen = len + zero;
+        int oneLen = len + one;
+        int zeroCount = (zeroLen >= low && zeroLen <= high) ? 1 : 0;
+        int oneCount = (oneLen >= low && oneLen <= high) ? 1 : 0;
+        int res = (zeroCount + f(low, high, zero, one, zeroLen, dp) + oneCount + f(low, high, zero, one, oneLen, dp))%mod;
+        return dp[len] = res;
+    }
+public:
+    int countGoodStrings(int low, int high, int zero, int one) {
+        int maxLen = high + max(zero , one);
+        vector<int> dp(maxLen + 1,-1);
+        return f(low, high, zero,one ,0,dp);
+    }
+};
