@@ -53,3 +53,36 @@ public:
         return f(days, costs, days[0], dp);
     }
 };
+
+//Tabulation
+class Solution {
+private:
+    unordered_set<int> st;
+public:
+    int mincostTickets(vector<int>& days, vector<int>& costs) {
+        for(auto i : days)
+            st.insert(i);
+
+        int maxi = days[days.size() - 1] + 30;
+        vector<int> dp(maxi + 1, 0);
+
+        int n = days.size();
+
+
+        for(int day = days[n - 1]; day >= 0;day--)
+        {
+            if(st.find(day) == st.end())
+            {
+                dp[day] = 0 + dp[day + 1];
+                continue;
+            }
+                
+            int oneDay = costs[0] + dp[day + 1];
+            int sevenDays = costs[1] + dp[day + 7];
+            int thirtyDays = costs[2] + dp[day + 30];
+            dp[day] = min({oneDay, sevenDays, thirtyDays});
+        }
+
+        return dp[days[0]];
+    }
+};
