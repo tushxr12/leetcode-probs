@@ -79,3 +79,36 @@ public:
         return ans;
     }
 };
+
+//Optimal
+class Solution {
+public:
+    int countPalindromicSubsequence(string s) {
+        map<char, int> firstOcc, lastOcc;
+        for(int i = 0;i < s.size();i++)
+        {
+            char ch = s[i];
+            if(firstOcc.find(ch) == firstOcc.end())
+            {
+                firstOcc[ch] = i;
+            }
+            lastOcc[ch] = i;
+        }
+        int ans = 0;
+        for(auto ch : firstOcc)
+        {
+            int key = ch.first;
+            int first = firstOcc[key];
+            int last = lastOcc[key];
+            if(first == last)
+                continue;
+            set<char> st1;
+            for(int i = first + 1;i < last;i++)
+            {
+                st1.insert(s[i]);
+            }
+            ans += (st1.size());
+        }
+        return ans;
+    }
+};
