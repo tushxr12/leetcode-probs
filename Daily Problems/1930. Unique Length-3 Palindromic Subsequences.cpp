@@ -42,3 +42,40 @@ public:
         return ans;
     }
 };
+
+//Better
+class Solution {
+public:
+    int countPalindromicSubsequence(string s) {
+        set<char> st;
+        for(auto i : s)
+            st.insert(i);
+        cout<<st.size(); // Count of unique chars
+        int ans = 0;
+        for(auto ch : st)
+        {
+            int first = -1, last = -1;
+            //aabca
+            for(int i = 0;i < s.size();i++)
+            {
+                if(ch == s[i])
+                {
+                    if(first == -1)
+                    {
+                        first = i;
+                    }
+                    last = i;
+                }
+            }  
+            if(first == last)
+                continue;
+            set<char> st1;
+            for(int i = first + 1;i < last;i++)
+            {
+                st1.insert(s[i]);
+            }
+            ans += (st1.size());
+        }
+        return ans;
+    }
+};
