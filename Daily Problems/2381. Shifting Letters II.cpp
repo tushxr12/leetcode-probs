@@ -30,3 +30,40 @@ public:
         return s;
     }
 };
+
+//Better
+class Solution {
+public:
+    string shiftingLetters(string s, vector<vector<int>>& shifts) {
+        int n = s.size();
+        vector<int> arr(n);
+
+        for(auto i : shifts)
+        {
+            if(i[2] == 1)
+            {
+                arr[i[0]]++;
+                if(i[1] + 1 < n)
+                    arr[i[1] + 1]--;
+            }
+            else
+            {
+                arr[i[0]]--;
+                if(i[1] + 1 < n)
+                    arr[i[1] + 1]++;
+            }
+        }   
+
+        string ans = "";
+        int sum = 0;
+        for(int i  = 0;i < n;i++)
+        {
+            sum = (sum + arr[i])%26;
+            if(sum < 0)
+                sum += 26;
+            char newChar = (char)('a' + (s[i] - 'a' + sum) % 26);
+            ans += newChar;
+        }
+        return ans;
+    }
+};
