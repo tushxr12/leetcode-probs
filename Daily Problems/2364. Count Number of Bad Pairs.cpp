@@ -16,3 +16,19 @@ public:
         return ans;
     }
 };
+
+//Better
+class Solution {
+public:
+    long long countBadPairs(vector<int>& nums) {
+        long long n = nums.size();
+        long long goodPairs = 0, totalPairs = n*(n-1)/2;
+        unordered_map<int,int> mpp;
+        for(int i = 0;i < n;i++)
+        {
+            goodPairs += mpp[i - nums[i]];
+            mpp[i - nums[i]]++;
+        }
+        return (totalPairs - goodPairs);
+    }
+};
