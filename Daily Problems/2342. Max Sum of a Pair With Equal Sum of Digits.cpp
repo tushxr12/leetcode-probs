@@ -62,3 +62,39 @@ public:
         return maxi;
     }
 };
+
+//Best
+class Solution {
+private:
+    long long digitSum(long long number)
+    {
+        long long sum = 0;
+        while(number)
+        {
+            sum += (number%10);
+            number /= 10;
+        }
+        return sum;
+    }
+public:
+    int maximumSum(vector<int>& nums) {
+        int n = nums.size();
+        long long sum = 0, maxi = -1;
+        vector<int> mpp(82,0);
+        for(auto i : nums)
+        {
+            long long digitSumm = digitSum(i);
+            if(mpp[digitSumm] > 0)
+            {
+                int prevNum = mpp[digitSumm];
+                maxi = max(maxi, (long long)prevNum + i);
+                mpp[digitSumm] = max(i, prevNum);
+            }
+            else
+            {
+                mpp[digitSumm] = i;
+            }
+        }
+        return maxi;
+    }
+};
