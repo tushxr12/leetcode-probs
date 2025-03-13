@@ -1,7 +1,7 @@
 class Solution {
 public:
     int maximumCount(vector<int>& nums) {
-        int pc = 0, nc = 0;
+        int pc = 0, nc = 0; //Positive count -> pc, Negative count -> nc
         for(auto i : nums)
             if(i < 0)
                 nc++;
