@@ -23,3 +23,22 @@ public:
         return cnt;
     }
 };
+
+//Using constant space 
+class Solution {
+public:
+    int numEquivDominoPairs(vector<vector<int>>& dominoes) {
+        vector<int> vec(100);
+        int res = 0;
+        for(auto &i : dominoes)
+        {
+            if(i[0] > i[1])
+                swap(i[0], i[1]);
+            
+            int num = i[0]*10 + i[1];
+            res += vec[num];
+            vec[num]++;
+        }
+        return res;
+    }
+};
