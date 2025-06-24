@@ -74,3 +74,27 @@ public:
         return dp[n - 1];
     }
 };
+
+//Space Optimization
+//TC->O(N)
+//SC->O(1)
+class Solution {
+public:
+    int frogJump(vector<int>& heights) {
+        int n = heights.size();
+        int prev = 0, secondPrev = 0;
+
+        for(int i = 1;i < n;i++)
+        {
+            int poss1 = prev + abs(heights[i] - heights[i - 1]);
+            int poss2 = INT_MAX;
+            if(i > 1)
+                poss2 = min(poss2,secondPrev + abs(heights[i] - heights[i - 2]));
+            
+            int curr = min(poss1, poss2);
+            secondPrev = prev;
+            prev = curr;
+        }
+        return prev;
+    }
+};
