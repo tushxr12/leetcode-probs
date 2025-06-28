@@ -89,3 +89,41 @@ public:
         return dp[n - 1][m - 1];
     }
 };
+
+//Space Optimization
+//TC->O(N*M)
+//SC->O(M)
+class Solution {
+public:
+    int uniquePaths(int n, int m) {
+        // dp[0][0] = 1;
+        vector<int> prev(m, 0);
+
+        for(int i = 0;i < n;i++)
+        {
+            vector<int> temp(m, 0);
+            for(int j = 0;j < m;j++)
+            {
+                if(i == 0 && j == 0)
+                {
+                    temp[j] = 1;
+                    continue;
+                }
+
+                int top = 0, left = 0;
+
+                //Top 
+                if(i > 0)
+                    top = prev[j];
+
+                //Left
+                if(j > 0)
+                    left = temp[j - 1];
+
+                temp[j] = (top + left);
+            }
+            prev = temp;
+        }
+        return prev[m - 1];
+    }
+};
