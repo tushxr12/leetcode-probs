@@ -8,7 +8,7 @@ public:
             if(word[i] == word[i - 1])
                 ans+=1;
         }
-        ans+=1;
+        ans+=1; //For original word given
         return ans;
     }
 };
