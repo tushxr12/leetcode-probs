@@ -68,3 +68,45 @@ public:
         return func(n - 1,arr,n,sum/2,dp);
     }
 };
+
+//Tabulation
+class Solution{
+public:
+    bool equalPartition(int n, vector<int> arr) {
+        int target = 0;
+        for(auto i : arr)
+            target += i;
+        
+        if(target%2)
+            return false;
+
+        vector<vector<bool>> dp(n, vector<bool>(target + 1,0));
+
+        for(int i = 0;i <n;i++)
+            dp[i][0] = true;
+        
+        if(arr[0] <= target)
+            dp[0][arr[0]] = true;
+        
+        int sum = target;
+
+        for(int index = 1; index < n;index++)
+        {
+            for(int target = 0; target <= sum; target++)
+            {   
+                //Not pick
+                bool notPick = dp[index - 1][target];
+
+                //Pick 
+                bool pick = false;
+                if(arr[index] <= target)
+                    pick = dp[index - 1][target - arr[index]];
+
+                dp[index][target] = (pick || notPick);
+            }
+        }
+        
+        
+        return dp[n-1][sum/2];
+    }
+};
