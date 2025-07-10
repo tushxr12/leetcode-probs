@@ -110,3 +110,43 @@ public:
         return dp[n-1][sum/2];
     }
 };
+
+//Space optimization
+class Solution{
+public:
+    bool equalPartition(int n, vector<int> arr) {
+        int target = 0;
+        for(auto i : arr)
+            target += i;
+        
+        if(target%2)
+            return false;
+
+        vector<bool> prev(target + 1,0), curr(target + 1,0);
+
+        prev[0] = true;
+        curr[0] = true;
+
+        prev[arr[0]] = true;
+        
+        int sum = target;
+
+        for(int index = 1; index < n;index++)
+        {
+            for(int target = 0; target <= sum; target++)
+            {   
+                //Not pick
+                bool notPick = prev[target];
+
+                //Pick 
+                bool pick = false;
+                if(arr[index] <= target)
+                    pick = prev[target - arr[index]];
+
+                curr[target] = (pick || notPick);
+            }
+            prev = curr;
+        }
+        return prev[sum/2];
+    }
+};
