@@ -129,3 +129,35 @@ class Solution{
 		return dp[n-1][K];
 	}
 };
+
+//Space optimization
+class Solution{
+    int mod = 1e9 + 7;
+	public:
+	int perfectSum(vector<int>&arr, int K){
+        int n = arr.size();
+        vector<vector<int>> dp(n , vector<int>(K + 1, 0));
+        vector<int> prev(K + 1, 0), curr(K + 1,0);
+
+        prev[0] = curr[0] = 1;
+        
+        if(arr[0] <= K)
+            prev[arr[0]] = 1;
+
+        for(int index = 1; index < n;index++)
+        {
+            for(int target = 1; target <= K;target++)
+            {
+                int notTake = prev[target];
+
+                int take = 0;
+                if(arr[index] <= target)
+                    take = (prev[target - arr[index]])%mod;
+                
+                curr[target] = (take + notTake) % mod;
+            }
+            prev = curr;
+        }
+        return prev[K];
+	}
+};
