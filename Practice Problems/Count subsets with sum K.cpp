@@ -65,3 +65,36 @@ class Solution{
         return func(n - 1, K, arr);
 	}
 };
+
+//Memoization
+class Solution{
+    int mod = 1e9 + 7;
+
+    private:
+    int func(int index, int target, vector<int> &arr, vector<vector<int>> &dp)
+    {
+        if(target == 0)
+            return 1;
+        
+        if(index == 0)
+            return (target == arr[0]) ? 1 : 0;
+        
+        if(dp[index][target] != -1)
+            return dp[index][target];
+        
+        int notTake = func(index - 1, target, arr, dp);
+
+        int take = 0;
+        if(arr[index] <= target)
+            take = func(index - 1, target - arr[index], arr, dp);
+        
+        return dp[index][target] = (take + notTake) % mod;
+    }
+
+	public:
+	int perfectSum(vector<int>&arr, int K){
+        int n = arr.size();
+        vector<vector<int>> dp(n , vector<int>(K + 1, -1));
+        return func(n - 1, K, arr, dp);
+	}
+};
