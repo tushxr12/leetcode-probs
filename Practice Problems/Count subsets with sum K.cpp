@@ -1,3 +1,4 @@
+//Recursion (Brute force)
 class Solution{
     private:
     int func(int index, int currSum, vector<int> &arr, int k)
@@ -33,5 +34,34 @@ class Solution{
 	int perfectSum(vector<int>&arr, int K){
         int n = arr.size();
         return func(n - 1, 0, arr, K);
+	}
+};
+
+//Recursion(Better and Simple)
+class Solution{
+    int mod = 1e9 + 7;
+
+    private:
+    int func(int index, int target, vector<int> &arr)
+    {
+        if(target == 0)
+            return 1;
+        
+        if(index == 0)
+            return (target == arr[0]) ? 1 : 0;
+        
+        int notTake = func(index - 1, target, arr);
+
+        int take = 0;
+        if(arr[index] <= target)
+            take = func(index - 1, target - arr[index], arr);
+        
+        return (take + notTake) % mod;
+    }
+
+	public:
+	int perfectSum(vector<int>&arr, int K){
+        int n = arr.size();
+        return func(n - 1, K, arr);
 	}
 };
