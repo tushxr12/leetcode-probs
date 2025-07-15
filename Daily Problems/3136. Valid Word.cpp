@@ -56,3 +56,43 @@ public:
         return false;
     }
 };
+
+//Better
+class Solution {
+private:
+    bool isVowel(char c)
+    {
+        return (c == 'a' || c == 'e' || c =='i' || c == 'o' || c == 'u');
+    }
+public:
+    bool isValid(string word) {
+        int n = word.size();
+
+        if(n < 3)
+            return false;
+        
+        bool hasVowel = false, hasConsonant = false;
+
+        for(auto ch : word)
+        {
+            if(isalpha(ch))
+            {
+                ch = tolower(ch);
+                cout<<"Current char : "<<ch<<endl;
+                if(isVowel(ch))
+                {
+                    hasVowel = true;
+                }
+                else
+                {
+                    hasConsonant = true;
+                }
+            }
+            else if(!isdigit(ch))
+            {
+                return false;
+            }
+        }
+        return (hasVowel && hasConsonant);
+    }
+};
