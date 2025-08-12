@@ -24,6 +24,8 @@ public:
 };
 
 // Using DP
+// TC -> O(N*N)
+// SC -> O(N*N)
 class Solution {
 private:
     int solve(int n,int num,int x, vector<vector<int>> &dp){
