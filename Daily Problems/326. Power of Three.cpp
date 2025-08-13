@@ -13,3 +13,15 @@ public:
         return (n == 1);
     }
 };
+
+// Approach-3
+// TC -> O(1)
+// SC -> O(1)
+class Solution {
+public:
+    bool isPowerOfThree(int n) {
+        // Max 32 bit power of 32
+        double maxThreePowVal = pow(3,19);
+        return (n > 0 && ((int)maxThreePowVal % n) == 0);
+    }
+};
