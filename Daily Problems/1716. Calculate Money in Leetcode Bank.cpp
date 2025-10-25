@@ -1,3 +1,4 @@
+// Calculate Money in Leetcode Bank
 class Solution {
 public:
     int totalMoney(int n) {
