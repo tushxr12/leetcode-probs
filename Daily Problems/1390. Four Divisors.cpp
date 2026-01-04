@@ -25,6 +25,7 @@ private:
         return (cnt == 4) ? sum : 0;
     }
 public:
+    // TC -> O(N*sqrt(MaxNum))
     int sumFourDivisors(vector<int>& nums) {
         int n = nums.size();
         int sum = 0;
