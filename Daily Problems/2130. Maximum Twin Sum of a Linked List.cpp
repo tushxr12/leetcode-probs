@@ -31,3 +31,52 @@ public:
         return maxSum;
     }
 };
+
+// Optimal
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* reverseLL(ListNode* head)
+    {
+        ListNode* temp = head, *prev = NULL;
+        while(temp)
+        {
+            ListNode* front = temp->next;
+            temp->next = prev;
+            prev = temp;
+            temp = front;
+        }
+        return prev;
+    }
+
+    int pairSum(ListNode* head) {
+        ListNode* slow = head, *fast = head;
+        while(fast->next && fast->next->next)
+        {
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+
+        ListNode* reverse = reverseLL(slow->next);
+        int maxi = 0;
+
+        ListNode* temp = head;
+
+        while(reverse != NULL)
+        {
+            maxi = max(maxi, reverse->val + temp->val);
+            temp = temp->next;
+            reverse = reverse->next;
+        }
+        return maxi;
+    }
+};
