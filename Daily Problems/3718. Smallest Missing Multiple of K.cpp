@@ -8,6 +8,7 @@ public:
             if(st.find(k*i) == st.end())
                 return i*k;
         }
+        // if nothing found return -1
         return -1;
     }
 };
