@@ -1,5 +1,6 @@
 class Solution {
 public:
+    // define custom type
     typedef unsigned long long ull;
     ull dp[1001][1001];
 
