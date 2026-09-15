@@ -1,5 +1,6 @@
 class Solution {
 public:
+    // All options
     string states[12] = {"RYG", "RGY", "RYR", "RGR", "YRG", "YGR", "YGY" , "YRY", "GRY", "GYR", "GRG", "GYG"};
     int mod = 1e9 + 7;
 
