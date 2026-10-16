@@ -3,6 +3,7 @@ public:
     int sumCounts(vector<int>& nums) {
         int n = nums.size(), ans = 0;
         for (int i = 0; i < n; i++) {
+            // to keep track of already seen elems
             bool seen[101] = {false};
             int distinct = 0;
             for (int j = i; j < n; j++) {
