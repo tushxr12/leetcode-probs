@@ -1,0 +1,33 @@
+class Solution {
+public:
+    int minOperations(vector<int>& nums) {
+        int n = nums.size();
+        int ac = 0;
+        int dc = 0;
+
+        for(int i = 1;i < n;i++)
+        {
+            ac += (nums[i] == (nums[i-1]+1)%n);
+            dc += (nums[i-1] == (nums[i]+1)%n);
+        }
+
+        if(ac == n - 1 && nums[0] == 0)
+            return 0;
+        
+        if(ac == n-1)
+        {
+            int leftRot = n - nums[0];
+            int rightRot = 1 + (nums.back() + 1) + 1;
+            return min(leftRot, rightRot);
+        }
+
+        if(dc == n - 1)
+        {
+            int leftRot = n - nums.back() + 1;
+            int rightRot = (nums[0] + 1)%n + 1;
+
+            return min(leftRot, rightRot);
+        }
+        return -1;
+    }
+};
