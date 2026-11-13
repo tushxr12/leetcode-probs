@@ -1,5 +1,5 @@
 class Solution {
-private:
+public:
     int check(vector<int> &nums)
     {
         int n = nums.size();
@@ -14,7 +14,6 @@ private:
         }
         return maxCount;
     }
-public:
     int longestMonotonicSubarray(vector<int>& nums) {
         int n = nums.size();
         int maxCount = 1, cnt = 1;
