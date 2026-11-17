@@ -1,6 +1,6 @@
 class Solution {
 public:
-    // 
+    // digit sum function
     string digitSum(string s, int k) {
         while (s.length() > k) {
             string next = "";
